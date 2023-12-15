@@ -48,6 +48,19 @@ export const authToken = (req, res, next) => {
     })
 }
 
+//Auth Token Para restablecer la contraseña
+
+export const resetAuth = async(token) => {
+    const verify = jwt.verify(token, PRIVATE_KEY, (error, credentials) => {
+        if(error) return false
+
+        
+        return credentials.user
+    })
+
+    return verify
+}
+
 export const passportCall = strategy => {
     return async(req, res, next) => {
         passport.authenticate(strategy, function(err, user, info) {

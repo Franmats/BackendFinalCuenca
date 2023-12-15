@@ -9,4 +9,6 @@ export default class User {
 
     getUserByID = async (id) => {return await UserModel.findById(id)}
 
+    updateOne = async(filter,change) => {return await UserModel.updateOne({_id:filter},{password:change})}
+
 }

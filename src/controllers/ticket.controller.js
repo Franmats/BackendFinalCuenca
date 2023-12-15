@@ -3,6 +3,7 @@ import { cartsService } from "../DAO/repository/index.js";
 import { usersService } from "../DAO/repository/index.js";
 import { productoviewService } from "../DAO/repository/index.js";
 import { ordersService } from "../DAO/repository/index.js";
+import config from "../config/config.js";
 import nodemailer from "nodemailer"
 
 
@@ -54,14 +55,14 @@ export const createTicket = async(req,res)=> {
             port:587,
             auth:{
                 user:"shopmailingshop@gmail.com",
-                pass:""
+                pass:config.passEmail
             }
         })
 
         const result = await transport.sendMail({
             from:"shopmailingshop@gmail.com",
-            to:"shopmailingshop@gmail.com",
-            subject:"Prueba de Mailing",
+            to:ticket.purchaser,
+            subject:"Gracias por su compra",
             html:`
                 <div>
                     Gracias por su compra, su numero de pedido: <br> <b>${number}</b>

@@ -5,7 +5,7 @@ import {productoviewService} from "../DAO/repository/index.js";
 export const getProductsViews = async (req,res)=> {
     const page = parseInt(req.query?.page || 1)
     const limit = parseInt(req.query?.limit || 10)
-    const query = req.query?.query
+    const query = req.params.query
     const sort =  parseInt(req.query?.sort || 1)//sort -1 precio asd-des, sort 1 precio des-asd
 
     const category = () => {
@@ -18,8 +18,8 @@ export const getProductsViews = async (req,res)=> {
     
     const result = await productoviewService.getProductsViews(category(),page,limit,sort)
 
-    const a = result.prevLink = result.hasPrevPage ? `/api/products/?page=${result.prevPage}&limit=${limit}` : ""
-    const b = result.nextLink = result.hasNextPage ? `/api/products/?page=${result.nextPage}&limit=${limit}` : ""
+    const a = result.prevLink = result.hasPrevPage ? `/api/products/${category()}/?page=${result.prevPage}&limit=${limit}` : ""
+    const b = result.nextLink = result.hasNextPage ? `/api/products/${category()}/?page=${result.nextPage}&limit=${limit}` : ""
     
     const info = {
       totalDocs: result.totalDocs,
@@ -43,7 +43,6 @@ export const getProductsViews = async (req,res)=> {
 export const getProductById = async (req,res)=> {
     const id = req.params.id
     const result = await productoviewService.getProductById(id)
-    console.log(result);
     res.json(result)
 }
 

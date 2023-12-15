@@ -57,7 +57,7 @@ app.use("/api/checkout",checkout)
 app.use("/api/products",productView)
 
 //Apertura de Servidor
-app.listen(8080,()=>{console.log("listen")})
+app.listen(config.port,()=>{console.log("listen")})
 
 //Config de passport
 initializePassport()

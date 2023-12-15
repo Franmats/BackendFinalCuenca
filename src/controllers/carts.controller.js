@@ -29,8 +29,7 @@ export const putProductInCart = async (req,res)=> {
     const pid = req.params.pid
     const qua = req.params.qua
     try {
-        const result = await cartsService.putProductInCart(cid,pid,qua)
-        result
+        await cartsService.putProductInCart(cid,pid,qua)
         res.json({status:"Producto en el carrito"})
     } catch (error) {
         console.log("error",error);

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { accessProfile,current,githubcallback,emptyReqRes, logOut, currentDTO, registerJWT, loginJWT } from "../controllers/users.controller.js";
+import { accessProfile,current,githubcallback,emptyReqRes, logOut, currentDTO, registerJWT, loginJWT,resetPass, passAuthToken } from "../controllers/users.controller.js";
 import { passportCall,authorization } from "../utils.js";
 import passport from "passport";
 
@@ -19,8 +19,12 @@ router.post("/login",passport.authenticate("login"),loginJWT)
 router.post("/register",passport.authenticate("register"),registerJWT)
 
 
-router.get("/profile",passportCall("jwt",{ session: false }),authorization("usuario"),accessProfile)
+router.get("/profile",passportCall("jwt",{ session: false }),authorization( "usuario" ),accessProfile)
 
+router.get("/profile/admin",passportCall("jwt",{ session: false }),authorization( "admin" ),accessProfile)
+
+router.post("/reset-pass",resetPass)
+router.post("/pass-auth/:token",passAuthToken)
 router.get("/current",passportCall("jwt",{ session: false }),authorization("usuario"), current)
 
 router.get("/logout",logOut)

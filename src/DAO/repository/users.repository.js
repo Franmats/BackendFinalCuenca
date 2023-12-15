@@ -1,3 +1,4 @@
+import { json } from "express";
 import UsersDTO from "../DTO/users.dto.js";
 import UsersDTOFront from "../DTO/usersFront.dto.js";
 export default class UsersRepository{
@@ -15,6 +16,8 @@ export default class UsersRepository{
     }
 
     getUserByID = async (id) => {return await this.dao.getUserByID(id)}
+
+    updateOne = async (filter,change) => {return await this.dao.updateOne(filter,change)}
 
     current = async (user)=> {
         console.log("aaaaaaaaaa",user);

@@ -1,9 +1,11 @@
-import { generateToken,authToken } from "../utils.js";
+import { generateToken,authToken, isValidPassword, createHash, resetAuth } from "../utils.js";
 import { usersService } from "../DAO/repository/index.js";
+import config from "../config/config.js";
+import nodemailer from "nodemailer"
 //REGISTRO
 
 export const registerJWT = async(req,res)=> {
-    res.json({ status: 'success' })
+    res.json({ status: 'Perfil Creado' })
 }
 
 export const loginJWT = async(req,res) => {
@@ -15,7 +17,7 @@ export const loginJWT = async(req,res) => {
     console.log(token);
     res.cookie('coderCookie', token, {
         httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true
-    }).send({message: 'Logged In!'})//change secure:true for https or secure:false for http in local produccion
+    }).send({status: 'Logged In!'})//change secure:true for https or secure:false for http in local produccion
 
 
 }
@@ -27,6 +29,84 @@ export const accessProfile = async(req,res)=> {
         user: req.user.user
     })
 
+}
+
+//RESTAURAR CONTRASEÑA
+
+export const resetPass = async(req,res) => {
+    const user = req.body
+    const email = user.email
+
+    const token = generateToken(user)
+
+    const sendEmail = async() => {
+        const transport = nodemailer.createTransport({
+            service:"gmail",
+            port:587,
+            auth:{
+                user:"shopmailingshop@gmail.com",
+                pass:config.passEmail
+            }
+        })
+        const result = await transport.sendMail({
+            from:"shopmailingshop@gmail.com",
+            to:email,
+            subject:"Cambio de contraseña",
+            html:`
+                <div>
+                    Cambio de contraseña: Copie el siguiente token y introduscalo en la siguiente pagina <br> 
+                    http://localhost:3000/api/session/reset-auth/${token}
+                
+                </div>
+            `,
+            attachments:[]
+        })
+
+        return result
+
+    }
+    
+    try {
+        const result = await usersService.getUserByEmail({email:email})
+
+        if (result!= undefined) {
+            await sendEmail()
+            res.json({status:"Revise su casilla de mails para restaurar"})
+        }else {
+            res.json({status:"Usuario no existente"})
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+export const passAuthToken = async(req,res) => {
+    const user = req.body 
+    const token = req.params.token
+    const password = user.password
+    
+    const emailAuth = await resetAuth(token)
+
+    if (emailAuth){
+    try {
+        const result = await usersService.getUserByEmail({email:emailAuth.email})
+        const a = isValidPassword(result, password)
+        if(a) {
+            res.json({status:"Elija otra contraseña no la misma"})
+        } else{
+            console.log(password)
+            
+            const hash = createHash(password)
+            const b = await usersService.updateOne(result.id,hash)
+            b
+            res.json({status:"cambio con exito"})
+        }
+    } catch (error) {
+        console.log(error)
+    }}else{
+        res.json({status:"Token invalido"})
+    }
 }
 
 //CURRENT

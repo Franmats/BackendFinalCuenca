@@ -4,6 +4,7 @@ import { getProductById, getProductsViews } from "../controllers/productsview.co
 const router = Router()
 
 router.get("/",getProductsViews)
-router.get("/:id",getProductById)
+router.get("/:query",getProductsViews)
+router.get("/product/:id",getProductById)
 
 export default router
