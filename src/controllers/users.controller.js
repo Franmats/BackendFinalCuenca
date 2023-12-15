@@ -55,7 +55,7 @@ export const resetPass = async(req,res) => {
             html:`
                 <div>
                     Cambio de contraseña: Copie el siguiente token y introduscalo en la siguiente pagina <br> 
-                    http://localhost:3000/api/session/reset-auth/${token}
+                    https://front-of-backend-cuenca-qz37g4ulj-franmats.vercel.app/api/session/reset-auth/${token}
                 
                 </div>
             `,
@@ -138,7 +138,7 @@ export const githubcallback= async(req,res)=> {
     console.log("Callback: ",req.user)
     req.session.user = req.user
     console.log(req.session)
-    res.redirect("http://localhost:8080/api/session/profile")
+    res.redirect("backendfinalcuenca-production.up.railway.app/api/session/profile")
 }
 
 //Middleware para bloqueo de ingreso a DB 
