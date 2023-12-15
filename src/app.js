@@ -29,7 +29,7 @@ import initializePassport from "./config/passport.config.js"
 
 
 const app = express()
-app.use(cors({credentials: true,origin:"https://front-of-backend-cuenca.vercel.app",methods:["GET","POST","PUT","DELETE"],allowedHeaders: ['Content-Type', 'Authorization']}))
+app.use(cors({origin:"front-of-backend-cuenca.vercel.app",credentials: true,methods:["GET","POST","PUT","DELETE"],allowedHeaders: ['Content-Type', 'Authorization']}))
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
