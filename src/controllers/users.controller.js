@@ -15,13 +15,10 @@ export const loginJWT = async(req,res) => {
 
     const token = generateToken(req.user)
     console.log(token);
-    res.setHeader('Set-Cookie', `coderCookie=${token}; HttpOnly; Secure; SameSite=None; Domain=front-of-backend-cuenca.vercel.app; Max-Age=3600`).cookie('coderCookie', token, {
-        httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true,domain:".front-of-backend-cuenca.vercel.app"
-    }).send({status: 'Logged In!'})
-
-   /*  res.cookie('coderCookie', token, {
-        httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true,domain:".front-of-backend-cuenca.vercel.app"
-    }).send({status: 'Logged In!'}) *///change secure:true for https or secure:false for http in local produccion
+    
+    res.cookie('coderCookie', token, {
+        httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true,path:"/", domain:"front-of-backend-cuenca.vercel.app"
+    }).send({status: 'Logged In!'})//change secure:true for https or secure:false for http in local produccion
 
 
 }
