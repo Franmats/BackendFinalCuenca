@@ -21,12 +21,17 @@ export const loginJWT = async(req,res) => {
 
     try {
         res.cookie('coderCookie', token, {
+            
             secure: true,
+            
             httpOnly: false,
+           
             sameSite: 'None',
-            domain:".front-of-backend-cuenca.vercel.app",
+            
             path:"/",
-            maxAge: 3600000
+            
+            maxAge: 3600000,
+            
         }).send({ status: 'Logged In!' });
         
     } catch (error) {

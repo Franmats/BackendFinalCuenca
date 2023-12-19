@@ -33,6 +33,7 @@ app.use(cors({credentials: true,origin:"https://front-of-backend-cuenca.vercel.a
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(cookieParser());
 app.use(session({
     secret: 'secret',
     resave: true,
