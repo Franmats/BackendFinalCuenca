@@ -39,7 +39,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: {
         secure: true, // Puedes establecer esto en true en un entorno de producción con HTTPS
-        httpOnly: falseS,
+        httpOnly: false,
         domain: 'front-of-backend-cuenca.vercel.app', // Especifica tu dominio aquí
         maxAge: 3600000, // Establece la duración máxima de la cookie en milisegundos
     }
