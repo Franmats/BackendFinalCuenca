@@ -17,8 +17,8 @@ export const loginJWT = async(req,res) => {
     console.log(token);
     
     res.cookie('coderCookie', token, {
-        domain:"front-of-backend-cuenca.vercel.app",
-        httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true,path:"/"
+        
+        httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true,domain:"front-of-backend-cuenca.vercel.app",path:"/"
     }).send({status: 'Logged In!'})//change secure:true for https or secure:false for http in local produccion
 
 
