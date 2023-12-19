@@ -16,12 +16,15 @@ export const loginJWT = async(req,res) => {
     const token = generateToken(req.user)
     console.log(token);
     
+   
     res.cookie('coderCookie', token, {
-        
-        httpOnly: false, maxAge: 3600000, sameSite: 'None', secure: true,domain:"front-of-backend-cuenca.vercel.app",path:"/"
-    }).send({status: 'Logged In!'})//change secure:true for https or secure:false for http in local produccion
-
-
+        secure: true,
+        httpOnly: false,
+        sameSite: 'None',
+        domain:"front-of-backend-cuenca.vercel.app",
+        path:"/",
+        maxAge: 3600000
+    }).send({ status: 'Logged In!' });
 }
 //ACCESO AL PERFIL
 
