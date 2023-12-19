@@ -14,13 +14,9 @@ export const loginJWT = async(req,res) => {
     }
 
     const token = generateToken(req.user)
-    console.log(token);
-    
-   
-   
 
     try {
-        res.send({ status: 'Logged In!',payload:token });
+        res.json({ status: 'Logged In!',payload:token });
         
     } catch (error) {
         console.log(error)
@@ -61,7 +57,7 @@ export const resetPass = async(req,res) => {
             html:`
                 <div>
                     Cambio de contraseña: Copie el siguiente token y introduscalo en la siguiente pagina <br> 
-                    https://front-of-backend-cuenca-qz37g4ulj-franmats.vercel.app/api/session/reset-auth/${token}
+                    https://front-of-backend-cuenca.vercel.app/api/session/reset-auth/${token}
                 
                 </div>
             `,
@@ -142,9 +138,8 @@ export const emptyReqRes= async(req,res)=> {
 
 export const githubcallback= async(req,res)=> {
     console.log("Callback: ",req.user)
-    req.session.user = req.user
-    console.log(req.session)
-    res.redirect("backendfinalcuenca-production.up.railway.app/api/session/profile")
+    const user = req.user
+    res.json(user)
 }
 
 //Middleware para bloqueo de ingreso a DB 
