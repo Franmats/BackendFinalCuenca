@@ -36,7 +36,13 @@ app.use(express.json())
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        secure: true, // Puedes establecer esto en true en un entorno de producción con HTTPS
+        httpOnly: true,
+        domain: '.front-of-backend-cuenca.vercel.app', // Especifica tu dominio aquí
+        maxAge: 3600000, // Establece la duración máxima de la cookie en milisegundos
+    }
 }))
 
 //sockets y Http
