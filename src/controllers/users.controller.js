@@ -20,19 +20,7 @@ export const loginJWT = async(req,res) => {
    
 
     try {
-        res.cookie('coderCookie', token, {
-            
-            secure: true,
-            
-            httpOnly: false,
-           
-            sameSite: 'None',
-            
-            path:"/",
-            
-            maxAge: 3600000,
-            
-        }).send({ status: 'Logged In!' });
+        res.send({ status: 'Logged In!',payload:token });
         
     } catch (error) {
         console.log(error)
