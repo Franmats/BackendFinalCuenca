@@ -27,7 +27,7 @@ export const loginJWT = async(req,res) => {
             domain:"front-of-backend-cuenca.vercel.app",
             path:"/",
             maxAge: 3600000
-        })
+        }).send({ status: 'Logged In!' });
         
     } catch (error) {
         console.log(error)
