@@ -17,14 +17,22 @@ export const loginJWT = async(req,res) => {
     console.log(token);
     
    
-    res.cookie('coderCookie', token, {
-        secure: true,
-        httpOnly: false,
-        sameSite: 'None',
-        domain:"front-of-backend-cuenca.vercel.app",
-        path:"/",
-        maxAge: 3600000
-    }).send({ status: 'Logged In!' });
+   
+
+    try {
+        res.cookie('coderCookie', token, {
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            domain:"front-of-backend-cuenca.vercel.app",
+            path:"/",
+            maxAge: 3600000
+        })
+        
+    } catch (error) {
+        console.log(error)
+        
+    }
 }
 //ACCESO AL PERFIL
 
