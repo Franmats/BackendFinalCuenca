@@ -9,5 +9,7 @@ export default {
     dbUrl:process.env.DBURL,
     dbName:process.env.DBNAME,
     stripeCode:process.env.STRIPECODE,
-    passEmail:process.env.PASSEMAIL
+    passEmail:process.env.PASSEMAIL,
+    privateKey:process.env.PRIVATE_KEY
+
 }

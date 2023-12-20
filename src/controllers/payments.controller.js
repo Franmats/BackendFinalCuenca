@@ -28,6 +28,5 @@ export const createSession = async (req,res) => {
         cancel_url:"https://front-of-backend-cuenca.vercel.app/api/checkout"
     })
 
-    console.log(session);
     return res.json(session)
 }
