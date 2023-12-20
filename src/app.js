@@ -14,7 +14,6 @@ import cartview from "./routes/cart.view.js"
 import userRouter from "./routes/users.router.js"
 import ticketRouter from "./routes/ticket.prueba.js"
 import productView from "./routes/productsview.router.js"
-import rutas from "./routes/rutas.js"
 import checkout from "./routes/payments.router.js"
 /* import routerViews from "./routes/views.router.js"
 import routerProducts from "./routes/products.route.js"
@@ -55,7 +54,7 @@ const io = new Server(httpServer) */
 //Multer
 app.use("/static",express.static(__dirname + "/public"))
 //Rutas Principales
-app.use("/",rutas)
+
 app.use("/prueba",productsprueba)
 app.use("/api/cart",cartview)
 app.use("/api/session",userRouter)
