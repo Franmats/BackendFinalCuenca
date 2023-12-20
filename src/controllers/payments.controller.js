@@ -24,8 +24,8 @@ export const createSession = async (req,res) => {
             }
         ],
         mode:"payment",
-        success_url:"http://localhost:3000/api/tickets",
-        cancel_url:"http://localhost:3000/api/checkout"
+        success_url:"https://front-of-backend-cuenca.vercel.app/api/tickets",
+        cancel_url:"https://front-of-backend-cuenca.vercel.app/api/checkout"
     })
 
     console.log(session);
